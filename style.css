@@ -1,0 +1,27 @@
+#container{
+    height: 500px;
+    width: 500px;
+    background-color: black;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.cell{
+    background-color: black;
+    border: 2px solid white;
+    color: white;
+}
+
+#status-window{
+    width: 500px;
+    height: 50px;
+    background-color: lightgray;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    word-spacing: 10px;
+}
