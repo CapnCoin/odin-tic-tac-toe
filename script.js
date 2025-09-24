@@ -18,7 +18,7 @@ const GameBoard = (function(){
      * @returns {bool} true if marker has been placed. false if the marker could not be placed.
      */
     const placeMarker = (index, marker) => {
-        if(board[index] === ''){
+        if(board[index] === '' && !GameController.getGameEnded()){
             board[index] = marker;
             return true;
         }
@@ -30,9 +30,9 @@ const GameBoard = (function(){
      * resets all markers on the board
      */
     const resetBoard = () => {
-        board.forEach((index) => {
-            index = '';
-        });
+        for(let i = 0; i < board.length; i++){
+            board[i] = '';
+        }
     }
 
     return {getBoard, placeMarker, resetBoard};
@@ -92,7 +92,6 @@ const GameController = (function(){
 
         if(winVar){
             gameEnded = true;
-            console.log(winVar);
         }
         else{
             switchPlayer();
@@ -174,6 +173,7 @@ const DisplayController = (function(){
     return {refresh, updateStatusWindow};
 })();
 
+//click on cell listerner
 document.addEventListener('click', (event) => {
     if(event.target.classList.contains('cell')){
         const cell = event.target;
@@ -187,6 +187,14 @@ document.addEventListener('click', (event) => {
             DisplayController.updateStatusWindow();
         }
     }
+});
+
+//reset button listener
+const resetButton = document.getElementById('reset-button');
+resetButton.addEventListener('click', () => {
+    GameController.resetGame();
+    DisplayController.updateStatusWindow();
+    DisplayController.refresh();
 });
 
 //first render
